@@ -1,6 +1,6 @@
 # faern's and widar's 3d printer setup
 
-Hi and welcome to my stash of:
+Hi and welcome to our stash of:
   * Slicer profiles
   * Printer firmware configurations
   * Hardware build logs, tuning benchmark dumps etc.
@@ -9,7 +9,7 @@ Printer specific configuration can be found under the directories with the name 
 
 ## Printers
 
-* [Veiron](Veiron/README.md)
+* [Veiron](Veiron/)
 
 ## Firmware config
 
@@ -17,9 +17,9 @@ See `$printer_name/Klipper-config` for the files.
 
 ## SuperSlicer profiles
 
-I use SuperSlicer and I originally based everything off of [Ellis SuperSlicer profiles]. I then did
-lots of tuning with [Ellis' Print Tuning Guide] and from other sources. The result is versioned in
-this repository under `$printer_name/SuperSlicer-profiles/``
+These SuperSlicer profiles are originally based off of [Ellis SuperSlicer profiles]. They have then
+gone through lots of tuning with [Ellis' Print Tuning Guide] and from other sources.
+The result is versioned in this repository under `$printer_name/SuperSlicer-profiles/``
 
 These are stored as separate INI files for each profile (printer, filament and print profiles
 separately). Use the [split_superslicer_config_bundle]
