@@ -1,4 +1,4 @@
-# faern's 3d printer setup
+# faern's and widar's 3d printer setup
 
 Hi and welcome to my stash of:
   * Slicer profiles
