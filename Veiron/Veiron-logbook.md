@@ -11,3 +11,13 @@ Things to do after the upgrade:
 * Compute Z min/max limits and Z calibration
 * PID heating calibration
 * 
+
+
+# Todo
+
+* Install Rapido hotend
+* Install CAN bus upgrade
+* Install TAP upgrade
+* Figure out filament drying/storage I can print directly from.
+* Perform input shaper tuning (after CAN upgrade)
+* Install exhaust fan. So chamber temperature can be controlled better.
