@@ -4,11 +4,7 @@
 # This allows versioning various printer and all filament configs separately.
 # Gives way nicer diffs and better overview.
 #
-# To use this, do the following:
-# 1. Export a Config Bundle from SuperSlicer (File -> Export -> Export Config Bundle...)
-#    Save it under any $name.ini
-# 2. Run this program with the exported bundle and derised output directory:
-#    `split_superslicer_config_bundle.py /path/to/$name.ini --output-dir SuperSlicer-profiles/`
+# See the repo's main README for usage instructions.
 
 import argparse
 import re
