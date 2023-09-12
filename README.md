@@ -10,6 +10,7 @@ Printer specific configuration can be found under the directories with the name 
 ## Printers
 
 * [Veiron](Veiron/)
+* [Otto](Otto/)
 
 ## Firmware config
 
