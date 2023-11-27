@@ -29,8 +29,6 @@ Things to do after the upgrade:
 
 # Todo
 
-* Install Rapido hotend
-* Install CAN bus upgrade
-* Install TAP upgrade
 * Figure out filament drying/storage I can print directly from.
 * Install exhaust fan. So chamber temperature can be controlled better.
+
