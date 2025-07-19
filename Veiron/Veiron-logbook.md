@@ -66,3 +66,29 @@ which manual I better follow, and which method I better use
 
 I flashed Klipper directly to the EBB board via USB (DFU mode). That worked fine! So my EBB board does not have any CanBoot/Katapult firmware now
 
+
+# 2025-07-16 - Tuning with Widar
+
+Planning on spending the day with Widar to tune and fix our printers. Mostly making sure they are still square and calibrated. And then increase the speed!
+
+I realize two very obvious things regarding why my printer is so "slow":
+1. I'm not using my input shaper profile :facepalm:. The profiles exist in my slicer, but they are not default, so I have forgotten to use it in a long time
+2. I'm basing my profile on Ellis PIF-profiles, which focus a lot on strength. So I have 4 perimiters and 40% infill by default, which is a lot more than
+   most people use. I could probably just go with fewer perimeters and less infill for most prints, and cut print time significantly.
+
+Now I'm trying to migrate to Orca slicer, but decided to postpone that until a later date when I have more time and when I feel happy with my profiles in SuperSlicer. So I move from one good state.
+
+We started doing speed tuning according to https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_speeds_accels.html.
+
+First I just bumped my motor `run_current` from 0.8 to 0.9. Our motors seem to handle 2A and our drivers 1.4A. So we are still on the safe side here, and Widar bumped his `run_current` to 0.9, so I'm just following him and it seems safe. For the X/Y/Z steppers that is, not the extruder stepper.
+
+We then started running the TEST_SPEED macro from the tuning guide. At first we thought something was wrong, because we could increase the acceleration a huge amount and never get any skips. We then raised the test velocity from 300 to 450 and more, and then we "finally" started getting skipping around 20-30k accel. We tested back and fourth. We settled on 450 probably being a good enough velocity, and then trying to find a fast but safe acceleration from that. The higher the velocity, the lower the max acceleration, and we thought a good acceleration was more important for most prints, so we did not want to go too bananas on the velocity.
+
+I went crazy and tried `SPEED=450 ACCEL=35000`. This broke my printer :( The printed part where the belts attach to the print head snapped. So Veiron was now not operational. But Widar continued trying the speed test with more sane values. Since we wanted to settle on velocity 450, and we wanted to deduct 15% from the max velocity and acceleration we found during testing, we settled on testing at `SPEED=530` (450/0.85). We ended up with 20000 in accel being safe. As in always working, and never skipping. So we set `max_accel: 17000` (15% less than found value)
+
+*Note from 2025-07-19*: I have now repaired Veiron and ran the same tests as Widar. However, I wanted to be able to sett acceleration to 20k for a nice rounder number. So I performed the torture test at `SPEED=530 ACCEL=23600`. It survived ITERATIONS=2, but started skipping at ITERATIONS=10 :( So I'll back down again. At `TEST_SPEED SPEED=530 ACCEL=20000 ITERATIONS=10` (same as worked fine for Widar) Veiron also skipped :( Si I went all the way down to `SPEED=500 ACCEL=20000` before it stopped skipping completely. So I'll configure it with:
+```
+max_velocity: 425
+max_accel: 17000
+```
+
