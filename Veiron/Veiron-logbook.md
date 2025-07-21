@@ -139,3 +139,7 @@ After some testing of increased speeds I finally stopped at `SPEED=750 ACCEL=200
 max_velocity: 650
 max_accel: 16000
 ```
+
+## Upgrade SuperSlicer and update slicer limits
+
+A day or two ago I did the bulk work of migrating to the latest version of SuperSlicer (from `2.4.58.5` as recommended in the Ellis profiles, to `2.7.61.6` which is the newest.) A bunch of stuff had to be fixed manually in the upgrade. And then I also adopted a lot of new printer configs to make it fit Veiron better. Things I had been too lazy to do in the past.
