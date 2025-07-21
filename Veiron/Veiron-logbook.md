@@ -92,3 +92,50 @@ max_velocity: 425
 max_accel: 17000
 ```
 
+# 2025-07-20 - More tuning
+
+After setting the new speeds yesterday, I need to finish the tuning. Today I upgraded >200 debian packages on the rpi as a start, to gte all software to the latest version.
+
+I then computed some heightmaps to see how flat my heatbed is. I did this heat soaked with the nozzle at 130C and the bed at 95C. I had the smooth side of the build plates up. Turns out it's more wobbly than I had hoped. The range is 0.177mm (almost a full layer!). Meanwhile Widar's Otto has a heightmap range of 0.144, so slightly better.
+
+I tried running input shaper resonance calibration again to see if things changed after fixing the toolhead, re-tensioning the belts etc etc. Now I get worse results (with regards to recommended max accel). :(
+
+I then performed the input shaper tuning again. Sadly the results are way different from last time. And the recommended `max_accel` is lower than last time. So I will likely try to find out why the resonance changed and if I can improve it.
+
+
+# 2025-07-21 - Getting a hold of some tuning now!
+
+Started writing the [tuning](../tuning.md) document.
+
+## Belt tension
+
+I compared belt tension between Veiron and Otto with the https://mods.vorondesign.com/details/fmmg4Yx2BLULkfDDpZnAng tool. Turns out Z was mostly good! Otto had the same tension on all four. And all but the back right Z belt on Veiron was the same as Otto. The last one was a bit too loose. Fixed! For A/B Otto was identical. Veiron was too loose on both, and not even equal between A and B. Fixed!
+
+## Input shaper
+
+New Input Shaper! I suspect the too loose and uneven A/B belt tension was the source of the worse resonance, and the lower recommended `max_accel`. And I was right! Re-running it now give me a recommended max accel of 4500:
+
+Output from calibrate_shaper.py for X-axis:
+```
+Fitted shaper 'mzv' frequency = 39.0 Hz (vibrations = 1.3%, smoothing ~= 0.134)
+To avoid too much smoothing with 'mzv', suggested max_accel <= 4500 mm/sec^2
+```
+Output from calibrate_shaper.py for Y-axis:
+```
+Fitted shaper '3hump_ei' frequency = 88.2 Hz (vibrations = 0.0%, smoothing ~= 0.105)
+To avoid too much smoothing with '3hump_ei', suggested max_accel <= 5700 mm/sec^2
+```
+
+## Max velocity and acceleration
+
+Both the tightening of the A/B belts and the new input shaper config warrants re-trying finding a new max velocity and acceleration. I re-tried the parameters that worked for Widar:
+```
+TEST_SPEED SPEED=530 ACCEL=20000 ITERATIONS=10
+```
+And it passed with flying colors! I realize that it's not worth pushing the acceleration more, because given the input shaper results, the vast majority of moves will be limited to acceleration <=4500 anyway. So I can stop at 20k accel, and see how far I can push the velocity instead. For many prints, speeds above 400 will never be reached anyway, becaues each move is rather short, and the acceleration becomes the bottleneck. But for filling larger areas or long straight lines, a high max velocity can really help.
+
+After some testing of increased speeds I finally stopped at `SPEED=750 ACCEL=20000 ITERATIONS=50` without ever experiencing any skipping. I doubt going faster would ever be practical anyway, so there is no reason to push it futher. I deduct 20% to be on the safe side and configure my printer with:
+```
+max_velocity: 650
+max_accel: 16000
+```
