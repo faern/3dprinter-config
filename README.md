@@ -12,6 +12,10 @@ Printer specific configuration can be found under the directories with the name 
 * [Veiron](Veiron/)
 * [Otto](Otto/)
 
+## 3d printer tuning
+
+See the [tuning](./tuning.md) document.
+
 ## Firmware config
 
 See `$printer_name/Klipper-config` for the files.
