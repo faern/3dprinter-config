@@ -46,7 +46,7 @@ Guide: https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_speeds_a
 
 TLDR:
 1. Make sure the `run_current` is high enough. Our motors are rated at 2A and our 2209 drivers at 1.4A. So we put `run_current` at 0.9 to be on the safe side.
-2. Add [this](https://github.com/AndrewEllis93/Print-Tuning-Guide/blob/main/macros/TEST_SPEED.cfg) macro to your printer.cfg file. 
+2. Add [this](https://github.com/AndrewEllis93/Print-Tuning-Guide/blob/main/macros/TEST_SPEED.cfg) macro to your printer.cfg file.
 3. Run the torture test. Start out with not too whack values and increase them until the printer starts skipping. This can be noticed by the printer sounding like it wants to die/smacking the print head into the walls, or by the `stepper_x` and `stepper_y` values differing more than `microsteps` from the two homing runs the torture test performs.
     `TEST_SPEED SPEED=400 ACCEL=15000 ITERATIONS=2`
 4. When you have found values for `SPEED` and `ACCEL` that don't skip with `ITERATIONS=2`, run the torture test again with `ITERATIONS=10`. If it starts skipping, lower the values.
@@ -61,6 +61,12 @@ Extruder calibration simply ensures that 100mm requested = 100mm extruded. Can b
 
 Do this cold and with a disconnected hotend, to only measure the extruder itself.
 
+## Maximum Volumetric Flow Rate
+
+The act of figuring out how fast your hotend and nozzle combination can melt plastic. Has to be measured once per hotend and nozzle combo as well as temperature. If you lower the nozzle print temperature, your max flow rate will also go down.
+
+The calibration built into Orca slicer is really simple and fast, use it!. The method described by Elli in https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html#method is really weird. In theory it's very simple. But every time I have tried it, I start losing out on extruded amount at *very* low flow rates. 
+
 ## First layer squish
 
 Should in theory only have to be done once with TAP. Or after every time you reassemble the TAP part of the toolhead at least. But in practice it seems to be needed more often. Do after nozzle changes etc.
@@ -69,20 +75,26 @@ https://ellis3dp.com/Print-Tuning-Guide/articles/first_layer_squish.html
 
 Both SuperSlicer and Orca slicer have this tuning built in. But they are a bit different. The one in Orca is more similar to Elli's guide.
 
-## Retraction
+At some point I was dead sure that optimal `z_offset` varied with printer temperature. But there *should* not be anything affecting this. And over a day of calibration at different temperatures finally convinced me that the temperature *does not* affect this. So just tune this with whatever filament at whatever temperature.
 
-You only need to fiddle with this if you have too much stringing or other retraction related issues.
-A good Pressure Advance calibration can alleviate some retraction issues. So calibrate PA first.
-
-TODO: What are our findings regarding good values for Veiron/Otto?
-
-https://ellis3dp.com/Print-Tuning-Guide/articles/retraction.html
-
-SuperSlicer has built in retraction calibration.
 
 ## Per filament tuning
 
 All these tunings has to be done per filament and nozzle. At *least* for every type of plastic, but it's good if it's done per vendor as well.
+
+### Nozzle temperature
+
+Arguably the most important per filament slicer setting, and the one to perform first. Greatly affects properties such as stringing, layer adhesion, warping and quality of bridges.
+
+Can be tested by printing a temperature tower. This is built into Orca slicer.
+
+When multiple temperatures give indistinguishable results, choose the higher temperature as that will give better layer adhesion and higher max volumetric flow rate. Remember to re-test your max volumetric flow rate if you lower the printing temp.
+
+### Extrusion Multiplier (Sometimes called "Flow ratio")
+
+https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html
+
+The calibration print is built into both SuperSlicer and Orca. However, the one built into SuperSlicer gave me (faern) very very high results. The results from the one built into Orca slicer were much more sane and basically identical to what Widar has and what I had in SuperSlicer.
 
 ### Pressure Advance (PA, or sometimes "Linear Advance")
 
@@ -92,11 +104,15 @@ https://ellis3dp.com/Print-Tuning-Guide/articles/pressure_linear_advance/pattern
 
 The calibration print is built into both SuperSlicer and Orca.
 
-### Extrusion Multiplier (Sometimes called "Flow" or "Filament flow calibration")
+## Retraction
 
-https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html
+You only need to fiddle with this if you have too much stringing or other retraction related issues. A good Pressure Advance calibration can alleviate some retraction issues. So calibrate PA first.
 
-The calibration print is built into both SuperSlicer and Orca.
+https://ellis3dp.com/Print-Tuning-Guide/articles/retraction.html
+
+SuperSlicer has built in retraction calibration, so has [Orca](https://github.com/SoftFever/OrcaSlicer/wiki/retraction-calib).
+
+I (faern) found that PLA has no noticeable stringing at all during this test, so I set my retraction to 0.4mm according to recommendations in Elli's guide. For PETG the stringing seemed to be the same for all retraction values, so I kept the retraction at the default 0.8 and have to try to combat stringing with PA and other settings.
 
 ### Filament shrinkage
 
