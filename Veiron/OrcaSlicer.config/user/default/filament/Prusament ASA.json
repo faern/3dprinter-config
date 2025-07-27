@@ -20,11 +20,14 @@
     "filament_max_volumetric_speed": [
         "40"
     ],
+    "filament_retraction_length": [
+        "0.4"
+    ],
     "filament_settings_id": [
         "Prusament ASA"
     ],
     "filament_shrink": [
-        "99.6%"
+        "99.45%"
     ],
     "filament_vendor": [
         "Prusament"
