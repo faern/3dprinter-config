@@ -61,12 +61,6 @@ Extruder calibration simply ensures that 100mm requested = 100mm extruded. Can b
 
 Do this cold and with a disconnected hotend, to only measure the extruder itself.
 
-## Maximum Volumetric Flow Rate
-
-The act of figuring out how fast your hotend and nozzle combination can melt plastic. Has to be measured once per hotend and nozzle combo as well as temperature. If you lower the nozzle print temperature, your max flow rate will also go down.
-
-The calibration built into Orca slicer is really simple and fast, use it!. The method described by Elli in https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html#method is really weird. In theory it's very simple. But every time I have tried it, I start losing out on extruded amount at *very* low flow rates. 
-
 ## First layer squish
 
 Should in theory only have to be done once with TAP. Or after every time you reassemble the TAP part of the toolhead at least. But in practice it seems to be needed more often. Do after nozzle changes etc.
@@ -88,7 +82,17 @@ Arguably the most important per filament slicer setting, and the one to perform 
 
 Can be tested by printing a temperature tower. This is built into Orca slicer.
 
-When multiple temperatures give indistinguishable results, choose the higher temperature as that will give better layer adhesion and higher max volumetric flow rate. Remember to re-test your max volumetric flow rate if you lower the printing temp.
+If you are not sure exactly which temperature to pick from the printed tower, you can think about these test results from CNC kitchen:
+
+> If you want to optimize your parts for the looks, rather go to the lower end of the recommended temperature scale. If you want to optimize your prints for strength, go to the upper limit and even a bit above. Keep in mind that emissions from the material also usually rise with higher temperatures.
+
+https://www.cnckitchen.com/blog/the-influence-of-extrusion-temperature-on-layer-adhesion
+
+### Maximum Volumetric Flow Rate
+
+The act of figuring out how fast your hotend and nozzle combination can melt the plastic. Has to be measured once per hotend and nozzle and filament type and temperature combination. If you lower the nozzle print temperature, your max flow rate will also go down for that filament. If you put on a larger nozzle, it will likely go up.
+
+The calibration built into Orca slicer is really simple and fast, use it! The method described by Elli in https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html#method is really weird. In theory it's very simple. But every time I have tried it, I start losing out on extruded amount at *very* low flow rates.
 
 ### Extrusion Multiplier (Sometimes called "Flow ratio")
 
