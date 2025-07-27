@@ -1,0 +1,42 @@
+{
+    "from": "User",
+    "inherits": "Voron 2.4 350 0.4 nozzle",
+    "is_custom_defined": "0",
+    "machine_max_acceleration_extruding": [
+        "16000",
+        "20000"
+    ],
+    "machine_max_acceleration_x": [
+        "16000",
+        "20000"
+    ],
+    "machine_max_acceleration_y": [
+        "16000",
+        "20000"
+    ],
+    "machine_max_acceleration_z": [
+        "350",
+        "200"
+    ],
+    "machine_max_speed_x": [
+        "650",
+        "200"
+    ],
+    "machine_max_speed_y": [
+        "650",
+        "200"
+    ],
+    "machine_max_speed_z": [
+        "30",
+        "12"
+    ],
+    "machine_start_gcode": "M190 S0\nM109 S0\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] FILAMENT=\"[filament_type]\"",
+    "name": "Veiron 0.4 nozzle",
+    "print_host": "http://veiron.lan.mirkk.eu/",
+    "printable_height": "310",
+    "printer_settings_id": "Veiron 0.4 nozzle",
+    "version": "2.3.0.3",
+    "z_hop": [
+        "0.2"
+    ]
+}

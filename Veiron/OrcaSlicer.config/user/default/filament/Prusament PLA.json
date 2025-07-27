@@ -1,0 +1,55 @@
+{
+    "compatible_printers": [
+        "Voron 2.4 350 0.4 nozzle"
+    ],
+    "enable_pressure_advance": [
+        "1"
+    ],
+    "filament_flow_ratio": [
+        "1"
+    ],
+    "filament_max_volumetric_speed": [
+        "30"
+    ],
+    "filament_retraction_length": [
+        "0.4"
+    ],
+    "filament_settings_id": [
+        "Prusament PLA"
+    ],
+    "filament_shrink": [
+        "99.89%"
+    ],
+    "filament_vendor": [
+        "Prusament"
+    ],
+    "from": "User",
+    "full_fan_speed_layer": [
+        "4"
+    ],
+    "hot_plate_temp": [
+        "60"
+    ],
+    "hot_plate_temp_initial_layer": [
+        "60"
+    ],
+    "inherits": "Generic PLA @System",
+    "is_custom_defined": "0",
+    "name": "Prusament PLA",
+    "nozzle_temperature": [
+        "213"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "213"
+    ],
+    "nozzle_temperature_range_high": [
+        "225"
+    ],
+    "nozzle_temperature_range_low": [
+        "205"
+    ],
+    "pressure_advance": [
+        "0.05"
+    ],
+    "version": "2.3.0.3"
+}

@@ -1,0 +1,58 @@
+{
+    "chamber_temperature": [
+        "50"
+    ],
+    "compatible_printers": [
+        "Voron 2.4 350 0.4 nozzle"
+    ],
+    "enable_pressure_advance": [
+        "1"
+    ],
+    "fan_min_speed": [
+        "66"
+    ],
+    "filament_density": [
+        "1.07"
+    ],
+    "filament_flow_ratio": [
+        "0.99"
+    ],
+    "filament_max_volumetric_speed": [
+        "40"
+    ],
+    "filament_settings_id": [
+        "Prusament ASA"
+    ],
+    "filament_shrink": [
+        "99.6%"
+    ],
+    "filament_vendor": [
+        "Prusament"
+    ],
+    "from": "User",
+    "hot_plate_temp": [
+        "112"
+    ],
+    "hot_plate_temp_initial_layer": [
+        "110"
+    ],
+    "inherits": "Generic ASA @System",
+    "is_custom_defined": "0",
+    "name": "Prusament ASA",
+    "nozzle_temperature_range_high": [
+        "270"
+    ],
+    "nozzle_temperature_range_low": [
+        "250"
+    ],
+    "pressure_advance": [
+        "0.04"
+    ],
+    "slow_down_layer_time": [
+        "10"
+    ],
+    "slow_down_min_speed": [
+        "15"
+    ],
+    "version": "2.3.0.3"
+}

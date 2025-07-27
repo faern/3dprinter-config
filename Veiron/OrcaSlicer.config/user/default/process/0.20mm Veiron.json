@@ -1,0 +1,17 @@
+{
+    "default_acceleration": "4500",
+    "from": "User",
+    "inherits": "0.20mm Standard @Voron",
+    "inner_wall_acceleration": "4500",
+    "inner_wall_speed": "300",
+    "internal_solid_infill_speed": "450",
+    "is_custom_defined": "0",
+    "name": "0.20mm Veiron",
+    "print_settings_id": "0.20mm Veiron",
+    "sparse_infill_speed": "450",
+    "support_speed": "300",
+    "travel_acceleration": "10000",
+    "travel_speed": "650",
+    "version": "2.3.0.3",
+    "xy_hole_compensation": "0.05"
+}
