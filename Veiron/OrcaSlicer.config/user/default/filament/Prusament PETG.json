@@ -11,6 +11,9 @@
     "filament_max_volumetric_speed": [
         "30"
     ],
+    "filament_retraction_length": [
+        "0.8"
+    ],
     "filament_settings_id": [
         "Prusament PETG"
     ],

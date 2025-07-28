@@ -26,9 +26,6 @@
     "filament_max_volumetric_speed": [
         "28"
     ],
-    "filament_retraction_length": [
-        "0.4"
-    ],
     "filament_settings_id": [
         "Prusament PC Blend"
     ],

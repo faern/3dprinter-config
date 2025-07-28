@@ -35,6 +35,9 @@
     "print_host": "http://veiron.lan.mirkk.eu/",
     "printable_height": "310",
     "printer_settings_id": "Veiron 0.4 nozzle",
+    "retraction_length": [
+        "0.4"
+    ],
     "version": "2.3.0.3",
     "z_hop": [
         "0.2"
