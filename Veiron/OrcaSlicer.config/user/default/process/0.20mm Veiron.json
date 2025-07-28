@@ -1,5 +1,6 @@
 {
     "default_acceleration": "4500",
+    "elefant_foot_compensation": "0.2",
     "from": "User",
     "inherits": "0.20mm Standard @Voron",
     "inner_wall_acceleration": "4500",
