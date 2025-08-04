@@ -302,3 +302,71 @@ I then printed a Califlower in PLA. And the skew error was 0.03°. Well within m
 
 [Califlower]: https://vector3d.shop/products/califlower-calibration-tool-mk2
 
+# 2025-07-28 - PC Blend cooling?
+
+PC Blend shrinks and warps quite easily. It is known to have layer shifting artifacts due to dynamic cooling for example. Is this something I can improve on by tweaking the part cooling fan settings? Currently my slicer cooling settings are mostly just guesswork for the hotter filaments (ASA + PC Blend).
+
+General [cooling tips and tricks from Elli](https://ellis3dp.com/Print-Tuning-Guide/articles/cooling_and_layer_times.html):
+* Enclosed printers want lots of part cooling
+* Smaller objects need more part cooling than large objects. Because large objects tend to warp more, and less part cooling mitigate some warping.
+* Variable fan speed can easily create inconsistent layers and banding
+* Increasing minimum layer time can help a lot, so you don't print a new layer on a still soft layer that is still shrinking.
+
+Printing a bunch of benchys with different cooling and other modifications. All prints had:
+* the benchy placed at the default center location, with starboard towards the doors
+* the chamber temp was ~60-63C when starting the print. Chamber stabilized at ~64-65C during printing
+* the printer doors were closed, but the closet door was wide open
+
+It should be kept in mind that a benchy is a small print. So the settings found here might not apply for optimal cooling of larger prints. This print is so small that the `slow_down_layer_time` really affected the printing speed. My default value for this (taken from PrusaSlicer for the Core One) was 20 seconds, and this was a limiting factor for the overall print speed.
+
+1. Default settings (Commit [8fe31b6](https://github.com/faern/3dprinter-config/commit/8fe31b601dd15a3698cedb2e084cde7c95e8c147)). Fan 50-60%. Print time 1h17m: Looks good overall. Some minor banding on the hull. One tiny layer shift/banding on the chimney.
+2. 100% fan constant speed. Print time 1h17m: Very similar artifacts as on #1, but a bit worse. The hull is a bit uneven. Probably from different layers shrinking a different amount.
+3. 10 seconds layer time (`slow_down_layer_time`). Print time 52m: Almost indistinguishable from #1, but maybe a tiny bit better results. The banding in the hull is slightly less noticeable.
+4. 20% fan constant speed. Print time 1h17m: Completely indistinguishable from #1.
+5. 30 seconds layer time (`slow_down_layer_time`). Print time 1h39m: No real noticeable difference
+
+The results are very anticlimactic. No cooling changes made any real differences. So keeping my old values.
+
+
+# 2025-07-31 - Best infill pattern?
+
+I watched Thomas Sanladerer's video https://www.youtube.com/watch?v=nV3GbN6hLjg and learned that Cubic (and Adaptive Cubic) are really great infill patterns.
+
+* Cubic is the strongest infill according to Tomas test
+* Cubic is pretty fast (13% faster than gyroid)
+
+I'm switching out my default infill pattern from the Orca default (Cross hatch) to Cubic now!
+
+
+# 2025-08-03 - New lower printer placement and new input shaping!
+
+To accomodate for my new filament drier (that has not yet arrived) I had to move the printer down, so it would fit on top of Veiron. Just ~20 cm under the shelf where Veiron sits is another shelf. So I planned to just move it to that and remove the old shelf. But the new shelf was not flat. So I had to put some plywood under one side to level it. I then jammed some wedges in on one side to make the shelf sit rock solid. It was not screwed in place, just placed on top of two wooden beams. With the wedges in place I crewed the shelf to the beams. Now it was very stable and sitting still.
+
+After placing Veiron on the new shelf I re-ran input shaping to accomodate for the new home. The results were very similar to before. Max accel ~4200.
+
+```
+faern@veiron:~ $ ~/klipper/scripts/calibrate_shaper.py /tmp/calibration_data_y_20250803_175209.csv
+Fitted shaper 'zv' frequency = 39.8 Hz (vibrations = 6.3%, smoothing ~= 0.101)
+To avoid too much smoothing with 'zv', suggested max_accel <= 6200 mm/sec^2
+Fitted shaper 'mzv' frequency = 37.6 Hz (vibrations = 0.1%, smoothing ~= 0.144)
+To avoid too much smoothing with 'mzv', suggested max_accel <= 4200 mm/sec^2
+Fitted shaper 'ei' frequency = 44.6 Hz (vibrations = 0.0%, smoothing ~= 0.162)
+To avoid too much smoothing with 'ei', suggested max_accel <= 3700 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 55.4 Hz (vibrations = 0.0%, smoothing ~= 0.176)
+To avoid too much smoothing with '2hump_ei', suggested max_accel <= 3400 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 66.6 Hz (vibrations = 0.0%, smoothing ~= 0.185)
+To avoid too much smoothing with '3hump_ei', suggested max_accel <= 3200 mm/sec^2
+Recommended shaper is mzv @ 37.6 Hz
+faern@veiron:~ $ ~/klipper/scripts/calibrate_shaper.py /tmp/calibration_data_x_20250803_175209.csv
+Fitted shaper 'zv' frequency = 45.2 Hz (vibrations = 11.6%, smoothing ~= 0.081)
+To avoid too much smoothing with 'zv', suggested max_accel <= 8000 mm/sec^2
+Fitted shaper 'mzv' frequency = 29.6 Hz (vibrations = 1.4%, smoothing ~= 0.232)
+To avoid too much smoothing with 'mzv', suggested max_accel <= 2600 mm/sec^2
+Fitted shaper 'ei' frequency = 40.0 Hz (vibrations = 0.4%, smoothing ~= 0.201)
+To avoid too much smoothing with 'ei', suggested max_accel <= 3000 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 47.2 Hz (vibrations = 0.0%, smoothing ~= 0.242)
+To avoid too much smoothing with '2hump_ei', suggested max_accel <= 2400 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 84.8 Hz (vibrations = 0.0%, smoothing ~= 0.114)
+To avoid too much smoothing with '3hump_ei', suggested max_accel <= 5300 mm/sec^2
+Recommended shaper is 3hump_ei @ 84.8 Hz
+```
