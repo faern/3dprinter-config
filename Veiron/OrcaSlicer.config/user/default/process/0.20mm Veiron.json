@@ -1,5 +1,6 @@
 {
     "default_acceleration": "4500",
+    "brim_type": "painted",
     "elefant_foot_compensation": "0.2",
     "from": "User",
     "inherits": "0.20mm Standard @Voron",
