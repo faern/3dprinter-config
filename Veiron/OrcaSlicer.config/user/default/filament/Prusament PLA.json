@@ -5,6 +5,9 @@
     "enable_pressure_advance": [
         "1"
     ],
+    "filament_cost": [
+        "370"
+    ],
     "filament_flow_ratio": [
         "1"
     ],

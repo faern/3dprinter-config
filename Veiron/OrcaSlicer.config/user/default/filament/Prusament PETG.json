@@ -8,6 +8,9 @@
     "fan_min_speed": [
         "80"
     ],
+    "filament_cost": [
+        "370"
+    ],
     "filament_max_volumetric_speed": [
         "30"
     ],

@@ -11,6 +11,9 @@
     "fan_min_speed": [
         "66"
     ],
+    "filament_cost": [
+        "370"
+    ],
     "filament_density": [
         "1.07"
     ],
