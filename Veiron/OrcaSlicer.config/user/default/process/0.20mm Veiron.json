@@ -17,5 +17,6 @@
     "travel_acceleration": "10000",
     "travel_speed": "650",
     "version": "2.3.0.3",
+    "wall_sequence": "inner-outer-inner wall",
     "xy_hole_compensation": "0.05"
 }
